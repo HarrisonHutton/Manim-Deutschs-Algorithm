@@ -10,13 +10,15 @@ class DeutschsAlgo(Scene):
         template = TexTemplate()
         template.add_to_preamble(r"\usepackage{physics}")
 
+        special_matrices = Text("Tools: ", font_size = 30, color = ORANGE)
+
         H = MathTex(
             r"\mathbb{H} =",
             r"\frac{1}{\sqrt{2}}",
             r"\mqty(1 & 1 \\ 1 & -1)",
             tex_template=template,
             font_size = 30
-        )
+        ).next_to(special_matrices, RIGHT)
 
         X = MathTex(
             r"X =",
@@ -32,10 +34,29 @@ class DeutschsAlgo(Scene):
             font_size = 30
         ).next_to(X, RIGHT)
 
+        e_0 = MathTex(
+            r"\hat{\vb{e}}_0",
+            "=",
+            r"\mqty(1 \\ 0)",
+            tex_template=template,
+            font_size = 30
+        ).next_to(I, RIGHT)
+
+        e_1 = MathTex(
+            r"\hat{\vb{e}}_0",
+            "=",
+            r"\mqty(0 \\ 1)",
+            tex_template=template,
+            font_size = 30
+        ).next_to(e_0, RIGHT)
+
         matrix_group = VGroup()
+        matrix_group.add(special_matrices)
         matrix_group.add(H)
         matrix_group.add(X)
         matrix_group.add(I)
+        matrix_group.add(e_0)
+        matrix_group.add(e_1)
         center = Point(location = [0., 0., 0.])
         matrix_group.move_to(center)
 
