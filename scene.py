@@ -36,7 +36,8 @@ class DeutschsAlgo(Scene):
         matrix_group.add(H)
         matrix_group.add(X)
         matrix_group.add(I)
-        matrix_group.center # TODO not centered correctly yet
+        center = Point(location = [0., 0., 0.])
+        matrix_group.move_to(center)
 
         # Algorithm simplification
         line0 = MathTex(
