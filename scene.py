@@ -10,8 +10,46 @@ class DeutschsAlgo(Scene):
         template = TexTemplate()
         template.add_to_preamble(r"\usepackage{physics}")
 
+        H = MathTex(
+            r"\mathbb{H} =",
+            r"\frac{1}{\sqrt{2}}",
+            r"\mqty(1 & 1 \\ 1 & -1)",
+            tex_template=template,
+            font_size = 30
+        )
+
+        X = MathTex(
+            r"X =",
+            r"\mqty(0 & 1 \\ 1 & 0)",
+            tex_template=template,
+            font_size = 30
+        ).next_to(H, RIGHT)
+
+        I = MathTex(
+            r"I =",
+            r"\mqty(1 & 0 \\ 0 & 1)",
+            tex_template=template,
+            font_size = 30
+        ).next_to(X, RIGHT)
+
+        matrix_group = VGroup()
+        matrix_group.add(H)
+        matrix_group.add(X)
+        matrix_group.add(I)
+        matrix_group.center # TODO not centered correctly yet
+
         # Algorithm simplification
+        line0 = MathTex(
+            r"(\mathbb{H} \otimes I)",
+            r"F",
+            r"(\mathbb{H} \otimes \mathbb{H})",
+            r"(I \otimes X)",
+            r"(\hat{\vb{e}}_0 \otimes \hat{\vb{e}}_0)",
+            tex_template=template,
+            font_size = 55
+        )
         line1 = MathTex(
+            "=",
             r"(\mathbb{H} \otimes I)",
             r"F",
             r"(\mathbb{H} \otimes \mathbb{H})",
@@ -55,7 +93,17 @@ class DeutschsAlgo(Scene):
 #         line4.set_color_by_gradient(PURE_GREEN, PURE_RED)
 
         # Animations
-        self.play(Write(line1))
+        self.play(FadeIn(matrix_group))
+        self.wait(4)
+        self.play(
+            matrix_group.animate.shift(UP*1).scale(0.6)
+        )
+
+        self.play(Write(line0))
+        self.wait(3)
+        self.play(
+            TransformMatchingTex(line0, line1),
+        )
         self.wait(3)
         self.play(
             TransformMatchingTex(line1, line2),
