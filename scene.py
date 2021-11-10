@@ -1,28 +1,5 @@
 from manim import *
 
-
-class SquareToCircle(Scene):
-    def construct(self):
-        circle = Circle()  # create a circle
-        circle.set_fill(BLUE, opacity=0.5)  # set the color and transparency
-        self.play(Create(circle))  # show the circle on screen
-
-
-class Rainbow(Scene):
-    def construct(self):
-        r = Text("RAINBOW", font_size=96)
-        r[0].set_color(RED)
-        r[1].set_color(ORANGE)
-        r[2].set_color(YELLOW)
-        r[3].set_color(GREEN)
-        r[4].set_color(TEAL)
-        r[5].set_color(BLUE)
-        r[6].set_color(PURPLE)
-
-        self.play(Write(r), run_time = 4)
-        self.play(r.animate.scale(2), run_time = 2)
-        self.play(FadeOut(r))
-
 class DeutschsAlgo(Scene):
     def construct(self):
         title = Text("Deutsch's Algorithm", font_size = 80, color = BLUE)
